@@ -1,9 +1,19 @@
 package com.example.demo.models;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.example.demo.models.lappy.Laptop;
+
+
+
 @Component("emp")
+@Scope("prototype") 
+//@Lazy
 public class Employee implements Person {
 	
 	@Value("Rajesh")
@@ -18,10 +28,24 @@ public class Employee implements Person {
 	@Value("Tester")
 	private String designation;
 	
+	@Autowired
+	private Address address;
+	
+	@Autowired
+//	@Qualifier("mac")
+	private Laptop laptop;
+	
+	public Employee() {
+		System.out.println("Employee() Object Created");
+	}
 	
 	@Override
 	public String toString() {
-		return "Employee [name=" + name + ", age=" + age + ", salary=" + salary + ", designation=" + designation + "]";
+		System.out.println("Employee [name=" + name + ", age=" + age + ", salary=" + salary + ", designation=" + designation);
+		System.out.println("Address: " + address);
+		System.out.println("Laptop: " +laptop);
+		return "";
 	}
 	
 }
+ 
